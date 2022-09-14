@@ -18,7 +18,27 @@ const routes = [
         name: 'dashboard',
         component: () => import('@/views/dashboard/Index.vue'),
 
-        // CHECK IS LOGGED_IN
+        // CHECK "isLoggedIn"
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        path: '/customer/order',
+        name: 'order',
+        component: () => import('@/views/order/Index.vue'),
+
+        // CHECK "isLoggedIn"
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        path: '/customer/order/:snap_token',
+        name: 'detail_order',
+        component: () => import('@/views/order/Show.vue'),
+
+        // CHECK "isLoggedIn"
         meta: {
             requiresAuth: true,
         },
@@ -34,7 +54,7 @@ const router = createRouter({
 // DEFINE ROUTE FOR HANDLE AUTHENTICATION
 router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
-        // CHECK VALUE FROM GETTERS "IS_LOGGED_IN" IN MODULE AUTH
+        // CHECK VALUE FROM GETTERS "isLoggedIn" IN MODULE "AUTH"
         if (store.getters['auth/isLoggedIn']) {
             next();
             return;
