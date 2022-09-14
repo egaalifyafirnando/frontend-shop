@@ -1,7 +1,17 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 
+// IMPORT ROUTER FROM FOLDER ROUTER
+import router from './router';
+// IMPORT VUEX FROM FOLDER STORE
+import store from './store';
+
 const app = createApp(App);
+
+// USE ROUTER
+app.use(router);
+// USE VUEX
+app.use(store);
 
 // DEFINE MIXINS FOR GLOBAL FUNCTION
 app.mixin({

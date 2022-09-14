@@ -35,7 +35,12 @@
                             </div>
 
                             <div class="account">
-                                <a href="#" class="btn search-button btn-md d-none d-md-block ml-4"> <i class="fa fa-user-circle"></i> ACCOUNT</a>
+                                <router-link v-bind:to="{ name: 'login' }" v-if="!isLoggedIn" class="btn search-button btn-md d-none d-md-block ml-4">
+                                    <i class="fa fa-user-circle"></i> ACCOUNT
+                                </router-link>
+                                <router-link v-bind:to="{ name: 'dashboard' }" v-else class="btn search-button btn-md d-none d-md-block ml-4">
+                                    <i class="fa fa-tachometer-alt"></i> DASHBOARD
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -46,7 +51,24 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 export default {
     name: 'HeaderComponent',
+
+    setup() {
+        const store = useStore();
+
+        // DECISION FOR HEADER BUTTON (ACCOUNT/DASHBOARD)
+        const isLoggedIn = computed(() => {
+            // GET GETTERS "isLoggedIn" FROM MODULE "AUTH" STORE VUEX
+            return store.getters['auth/isLoggedIn'];
+        });
+
+        return {
+            store,
+            isLoggedIn,
+        };
+    },
 };
 </script>
