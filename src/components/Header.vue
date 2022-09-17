@@ -29,9 +29,13 @@
                     <div class="col-md-4 col-5">
                         <div class="d-flex justify-content-end">
                             <div class="cart-header">
-                                <a href="#" class="btn search-button btn-md" style="color: #ffffff; background-color: #6677ef; border-color: #ffffff">
-                                    <i class="fa fa-shopping-cart"></i> 0 | Rp. 0
-                                </a>
+                                <router-link
+                                    v-bind:to="{ name: 'cart' }"
+                                    class="btn search-button btn-md"
+                                    style="color: #ffffff; background-color: #6677ef; border-color: #ffffff"
+                                >
+                                    <i class="fa fa-shopping-cart"></i> {{ cartCount }} | Rp. {{ moneyFormat(cartTotal) }}
+                                </router-link>
                             </div>
 
                             <div class="account">
@@ -51,7 +55,7 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 export default {
     name: 'HeaderComponent',
@@ -65,9 +69,30 @@ export default {
             return store.getters['auth/isLoggedIn'];
         });
 
+        const cartCount = computed(() => {
+            return store.getters['cart/cartCount'];
+        });
+
+        const cartTotal = computed(() => {
+            return store.getters['cart/cartTotal'];
+        });
+
+        onMounted(() => {
+            const token = store.state.auth.token;
+
+            if (!token) {
+                return;
+            }
+
+            store.dispatch('cart/cartCount');
+            store.dispatch('cart/cartTotal');
+        });
+
         return {
             store,
             isLoggedIn,
+            cartCount,
+            cartTotal,
         };
     },
 };

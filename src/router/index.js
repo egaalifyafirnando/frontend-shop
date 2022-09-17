@@ -63,6 +63,15 @@ const routes = [
         name: 'detail_category',
         component: () => import('@/views/category/Show.vue'),
     },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('@/views/cart/Index.vue'),
+
+        meta: {
+            requiresAuth: true,
+        },
+    },
 ];
 
 // CREATE ROUTER
