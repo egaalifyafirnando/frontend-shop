@@ -88,8 +88,7 @@ router.beforeEach((to, from, next) => {
             next();
             return;
         }
-        next();
-        return;
+        next('/login');
     } else {
         next();
     }

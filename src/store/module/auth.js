@@ -60,6 +60,9 @@ const auth = {
                         // COMMIT AUTH SUCCESS TO MUTATION
                         commit('AUTH_SUCCESS', token, user);
 
+                        // COMMIT GET USER TO MUTATION
+                        commit('GET_USER', user);
+
                         // RESOLVE TO COMPONENT WITH RESULT RESPONSE
                         resolve(response);
                     })
