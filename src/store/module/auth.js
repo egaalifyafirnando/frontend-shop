@@ -1,4 +1,4 @@
-import Api from '../../api/Api';
+import Api from '@/api/Api';
 
 const auth = {
     // NAMESPACE
@@ -100,10 +100,10 @@ const auth = {
                 localStorage.removeItem('user');
 
                 /**
-                 * commit ke module cart, untuk set mutation dan state cart menjadi kosong
+                 * COMMIT TO MODULE "CART", FOR SET MUTATION AND STATE "CART" TO EMPTY VALUE (0)
                  */
-                commit('cart/GET_CART', 0, { root: true }); // <-- kita tambahkan root menjadi true, karena beda modulue
-                commit('cart/TOTAL_CART', 0, { root: true }); // <-- kita tambahkan root menjadi true, karena beda modulue
+                commit('cart/GET_CART', 0, { root: true }); // <-- SET ROOT TO "true" BECAUSE DIFFERENT MODULE
+                commit('cart/TOTAL_CART', 0, { root: true }); // <-- // <-- SET ROOT TO "true" BECAUSE DIFFERENT MODULE
 
                 // DELETE HEADER AXIOS
                 delete Api.defaults.headers.common['Authorization'];
@@ -140,19 +140,18 @@ const auth = {
                         commit('GET_USER', user);
 
                         /**
-                         * commit cart total dan cart count ke state yang ada di module cart
+                         * COMMIT TO GET_CART AND CART_TOTAL IN MODULE "cart"
                          */
-
-                        //get dat cart
+                        // GET DATA CART
                         Api.get('/cart').then((response) => {
-                            //commit mutation GET_CART
-                            commit('cart/GET_CART', response.data.cart, { root: true }); // <-- kita tambahkan root menjadi true, karena beda modulue
+                            // COMMIT TO MUTATION "GET_CART"
+                            commit('cart/GET_CART', response.data.cart, { root: true }); // <-- SET ROOT TO "true" BECAUSE DIFFERENT MODULE
                         });
 
-                        //get total cart
+                        // GET TOTAL CART
                         Api.get('/cart/total').then((response) => {
-                            //commit mutation TOTAL_CART
-                            commit('cart/TOTAL_CART', response.data.total, { root: true }); // <-- kita tambahkan root menjadi true, karena beda modulue
+                            // COMMIT TO MUTATION "TOTAL_CART"
+                            commit('cart/TOTAL_CART', response.data.total, { root: true }); // <-- SET ROOT TO "true" BECAUSE DIFFERENT MODULE
                         });
 
                         // RESOLVE TO COMPONENT WITH RESULT RESPONSE

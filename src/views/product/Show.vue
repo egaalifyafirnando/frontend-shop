@@ -4,10 +4,11 @@
             <div class="col-md-4">
                 <div class="card border-0 rounded shadow">
                     <div class="card-body p-2">
-                        <img :src="product.image" class="w-100 border" />
+                        <img v-bind:src="product.image" class="w-100 border" />
                     </div>
                 </div>
             </div>
+
             <div class="col-md-8">
                 <div class="card border-0 rounded shadow">
                     <div class="card-body">
@@ -26,6 +27,7 @@
                                         <button class="btn btn-sm" style="color: #ff2f00; border-color: #ff2f00">DISKON {{ product.discount }} %</button>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td class="font-weight-bold">BERAT</td>
                                     <td>:</td>
@@ -37,6 +39,7 @@
                                 </tr>
                             </tbody>
                         </table>
+
                         <button @click.prevent="addToCart(product.id, calculateDiscount(product), product.weight)" class="btn btn-primary btn-lg btn-block">
                             <i class="fa fa-shopping-cart"></i> TAMBAH KE KERANJANG
                         </button>
@@ -44,6 +47,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row mt-5">
             <div class="col-md-12">
                 <div class="card border-0 rounded shadow">

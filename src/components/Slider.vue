@@ -19,6 +19,7 @@
 <script>
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+
 export default {
     name: 'SliderComponent',
 
@@ -26,9 +27,11 @@ export default {
         const store = useStore();
 
         onMounted(() => {
+            // RUN ACTION "getSliders" IN MODULE "SLIDER"
             store.dispatch('slider/getSliders');
         });
 
+        // GET VALUE "sliders" FROM STATE IN MODULE "SLIDER"
         const sliders = computed(() => {
             return store.state.slider.sliders;
         });

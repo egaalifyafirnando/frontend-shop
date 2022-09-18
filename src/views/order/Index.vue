@@ -10,6 +10,7 @@
                     <div class="card-body">
                         <h5 class="font-weight-bold"><i class="fas fa-shopping-cart"></i> MY ORDER</h5>
                         <hr />
+
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
                                 <tr>
@@ -22,15 +23,15 @@
                             </thead>
 
                             <tbody>
-                                <tr v-for="order in orders" v-bind:key="order.id">
+                                <tr v-for="order in orders" :key="order.id">
                                     <th>{{ order.invoice }}</th>
                                     <td>{{ order.name }}</td>
                                     <td>{{ order.courier.toUpperCase() }} | {{ order.service }} | Rp. {{ moneyFormat(order.cost_courier) }}</td>
                                     <td>Rp. {{ moneyFormat(order.grand_total) }}</td>
                                     <td class="text-center">
-                                        <router-link v-bind:to="{ name: 'detail_order', params: { snap_token: order.snap_token } }" class="btn btn-sm btn-primary"
-                                            >DETAIL</router-link
-                                        >
+                                        <router-link :to="{ name: 'detail_order', params: { snap_token: order.snap_token } }" class="btn btn-sm btn-primary">
+                                            DETAIL
+                                        </router-link>
                                     </td>
                                 </tr>
                             </tbody>

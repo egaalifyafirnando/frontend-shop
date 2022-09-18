@@ -6,6 +6,7 @@
                     <div class="card-body">
                         <h5><i class="fa fa-shopping-cart"></i> DETAIL PESENAN</h5>
                         <hr />
+
                         <table class="table" style="border-style: solid !important; border-color: rgb(198, 206, 214) !important">
                             <tbody>
                                 <tr v-for="cart in carts" v-bind:key="cart.id" style="background: #edf2f7">
@@ -14,6 +15,7 @@
                                             <img v-bind:src="cart.product.image" style="width: 100%; border-radius: 0.5rem" />
                                         </div>
                                     </td>
+
                                     <td class="b-none" width="50%">
                                         <h5>
                                             <b>{{ cart.product.title }}</b>
@@ -28,6 +30,7 @@
                                             </tr>
                                         </table>
                                     </td>
+
                                     <td class="b-none text-right">
                                         <p class="m-0 font-weight-bold">Rp. {{ moneyFormat(cart.price) }}</p>
 
@@ -57,6 +60,7 @@
                                         <p class="m-0" id="subtotal">{{ moneyFormat(cartTotal) }}</p>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td class="set-td text-left border-0">
                                         <p class="m-0">
@@ -65,9 +69,10 @@
                                     </td>
                                     <td class="set-td border-0 text-right">&nbsp; : Rp.</td>
                                     <td class="set-td border-0 text-right">
-                                        <p class="m-0" id="ongkir-cart">0</p>
+                                        <p class="m-0" id="ongkir-cart">{{ moneyFormat(state.courier_cost) }}</p>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td class="text-left border-0">
                                         <p class="font-weight-bold m-0 h5 text-uppercase">Grand Total</p>
@@ -84,9 +89,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6">
                 <div class="card border-0 shadow rounded">
-                    <!-- start ongkos kirim -->
                     <div class="card-body">
                         <h5><i class="fa fa-user-circle"></i> RINCIAN PENGIRIMAN</h5>
                         <hr />
@@ -185,8 +190,8 @@
                                             @change="getCostService"
                                         />
                                         <label class="form-check-label font-weight-normal mr-5" v-bind:for="value.service">
-                                            {{ value.service }} - Rp. {{ moneyFormat(value.cost[0].value) }}
-                                        </label>
+                                            {{ value.service }} - Rp. {{ moneyFormat(value.cost[0].value) }}</label
+                                        >
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +215,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- end ongkos kirim -->
                 </div>
             </div>
         </div>
@@ -374,10 +378,10 @@ export default {
             if (!state.name) {
                 validation.name = true;
             }
-            if (!state.name) {
+            if (!state.phone) {
                 validation.phone = true;
             }
-            if (!state.name) {
+            if (!state.address) {
                 validation.address = true;
             }
         }

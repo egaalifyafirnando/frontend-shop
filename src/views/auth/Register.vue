@@ -6,6 +6,7 @@
                     <div class="card-body">
                         <h4>REGISTER</h4>
                         <hr />
+
                         <form @submit.prevent="register">
                             <div class="row">
                                 <div class="col-md-6">
@@ -17,6 +18,7 @@
                                         {{ validation.name[0] }}
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email address</label>
@@ -38,6 +40,7 @@
                                         {{ validation.password[0] }}
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Konfirmasi Password</label>
@@ -45,12 +48,14 @@
                                     </div>
                                 </div>
                             </div>
+
                             <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
                         </form>
                     </div>
                 </div>
+
                 <div class="register mt-3 text-center">
-                    <p>Suda punya akun ? <router-link :to="{ name: 'login' }">Login Disini !</router-link></p>
+                    <p>Suda punya akun ? <router-link v-bind:to="{ name: 'login' }">Login Disini !</router-link></p>
                 </div>
             </div>
         </div>

@@ -83,11 +83,12 @@ const router = createRouter({
 // DEFINE ROUTE FOR HANDLE AUTHENTICATION
 router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
-        // CHECK VALUE FROM GETTERS "isLoggedIn" IN MODULE "AUTH"
+        // CHECK VALUE "isLoggedIn" FROM GETTERS IN MODULE "AUTH"
         if (store.getters['auth/isLoggedIn']) {
             next();
             return;
         }
+        // IF FALSE, PUSH TO LOGIN PAGE
         next('/login');
     } else {
         next();

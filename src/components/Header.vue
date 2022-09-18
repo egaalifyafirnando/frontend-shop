@@ -8,7 +8,6 @@
                             <span class="logo"><i class="fa fa-apple-alt"></i> APPLE STORE</span>
                         </router-link>
                     </div>
-
                     <div class="col-md-5 d-none d-md-block">
                         <form class="search-wrap">
                             <div class="input-group w-100">
@@ -25,7 +24,6 @@
                             </div>
                         </form>
                     </div>
-
                     <div class="col-md-4 col-5">
                         <div class="d-flex justify-content-end">
                             <div class="cart-header">
@@ -57,6 +55,7 @@
 <script>
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+
 export default {
     name: 'HeaderComponent',
 
@@ -65,26 +64,31 @@ export default {
 
         // DECISION FOR HEADER BUTTON (ACCOUNT/DASHBOARD)
         const isLoggedIn = computed(() => {
-            // GET GETTERS "isLoggedIn" FROM MODULE "AUTH" STORE VUEX
+            // GET GETTER "isLoggedIn" FROM MODULE "AUTH"
             return store.getters['auth/isLoggedIn'];
         });
 
+        // GET VALUE "cartCount" FROM GETTERS IN MODULE "CART"
         const cartCount = computed(() => {
             return store.getters['cart/cartCount'];
         });
 
+        // GET VALUE "cartTotal" FROM GETTERS IN MODULE "CART"
         const cartTotal = computed(() => {
             return store.getters['cart/cartTotal'];
         });
 
+        // CHECKING "token" FROM STATE IN MODULE "AUTH"
         onMounted(() => {
             const token = store.state.auth.token;
 
+            // IF NOT HAVE TOKEN, RETURN
             if (!token) {
                 return;
             }
-
+            // RUN ACTION "cartCount" IN MODULE "CART"
             store.dispatch('cart/cartCount');
+            // RUN ACTION "cartTotal" IN MODULE "CART"
             store.dispatch('cart/cartTotal');
         });
 

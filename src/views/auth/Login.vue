@@ -5,10 +5,12 @@
                 <div v-if="validation.message" class="mt-2 alert alert-danger">
                     {{ validation.message }}
                 </div>
+
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
                         <h4>LOGIN</h4>
                         <hr />
+
                         <form @submit.prevent="login">
                             <div class="form-group">
                                 <label>Email Address</label>
@@ -26,15 +28,11 @@
                                 {{ validation.password[0] }}
                             </div>
 
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                <label class="form-check-label" for="exampleCheck1">Ingatkan Saya</label>
-                            </div>
-
                             <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
                         </form>
                     </div>
                 </div>
+
                 <div class="register mt-3 text-center">
                     <p>Belum punya akun ? <router-link v-bind:to="{ name: 'register' }">Daftar Sekarang !</router-link></p>
                 </div>

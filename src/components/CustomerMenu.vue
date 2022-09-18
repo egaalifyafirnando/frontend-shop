@@ -4,7 +4,7 @@
             <h5 class="font-weight-bold">MAIN MENU</h5>
             <hr />
             <ul class="list-group">
-                <router-link :to="{ name: 'dashboard' }" class="list-group-item text-decoration-none text-dark text-uppercase">
+                <router-link v-bind:to="{ name: 'dashboard' }" class="list-group-item text-decoration-none text-dark text-uppercase">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </router-link>
                 <router-link v-bind:to="{ name: 'order' }" class="list-group-item text-decoration-none text-dark text-uppercase">
@@ -21,6 +21,7 @@
 <script>
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+
 export default {
     name: 'CustomerMenuComponent',
 
@@ -29,8 +30,9 @@ export default {
         const router = useRouter();
 
         function logout() {
-            // RUN ACTION "logout" IN MODULE "AUTH" STORE VUEX
+            // RUN ACTION "logout" IN MODULE "AUTH"
             store.dispatch('auth/logout').then(() => {
+                // THEN REDIRECT TO LOGIN PAGE
                 router.push({ name: 'login' });
             });
         }

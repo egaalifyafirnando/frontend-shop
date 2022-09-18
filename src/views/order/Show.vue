@@ -10,6 +10,7 @@
                     <div class="card-body">
                         <h5 class="font-weight-bold"><i class="fas fa-shopping-cart"></i> DETAIL ORDER</h5>
                         <hr />
+
                         <table class="table table-bordered">
                             <tr>
                                 <td style="width: 25%">NO. INVOICE</td>
@@ -38,7 +39,10 @@
                             <tr>
                                 <td>KURIR / SERVICE / COST</td>
                                 <td>:</td>
-                                <td>{{ detailOrder.courier }} / {{ detailOrder.service }} / Rp. {{ detailOrder.cost_courier }}</td>
+                                <td>
+                                    {{ detailOrder.courier }} / {{ detailOrder.service }} / Rp.
+                                    {{ detailOrder.cost_courier }}
+                                </td>
                             </tr>
 
                             <tr>
@@ -75,14 +79,16 @@
                     <div class="card-body">
                         <h5><i class="fa fa-shopping-cart"></i> DETAIL ORDER</h5>
                         <hr />
+
                         <table class="table" style="border-style: solid !important; border-color: rgb(198, 206, 214) !important">
                             <tbody>
-                                <tr v-for="product in productInOrder" :key="product.id" style="background: #edf2f7">
+                                <tr v-for="product in productInOrder" v-bind:key="product.id" style="background: #edf2f7">
                                     <td class="b-none" width="25%">
                                         <div class="wrapper-image-cart">
-                                            <img :src="product.image" style="width: 100%; border-radius: 0.5rem" />
+                                            <img v-bind:src="product.image" style="width: 100%; border-radius: 0.5rem" />
                                         </div>
                                     </td>
+
                                     <td class="b-none" width="50%">
                                         <h5>
                                             <b>{{ product.product_name }}</b>
@@ -97,6 +103,7 @@
                                             </tr>
                                         </table>
                                     </td>
+
                                     <td class="b-none text-right">
                                         <p class="m-0 font-weight-bold">Rp. {{ moneyFormat(product.price) }}</p>
                                     </td>

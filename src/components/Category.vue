@@ -24,6 +24,7 @@
 <script>
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+
 export default {
     name: 'CategoryComponent',
 
@@ -31,10 +32,12 @@ export default {
         const store = useStore();
 
         onMounted(() => {
+            // RUN ACTION "getCategories" IN MODULE "CATEGORY"
             store.dispatch('category/getCategories');
         });
 
         const categories = computed(() => {
+            // GET VALUE "categories" FROM STATE IN MODULE "CATEGORY"
             return store.state.category.categories;
         });
 
