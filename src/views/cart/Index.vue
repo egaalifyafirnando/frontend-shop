@@ -48,6 +48,17 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="form-group pb-2">
+                            <textarea
+                                class="form-control"
+                                style="border-radius: 0.5rem"
+                                id="note"
+                                rows="3"
+                                placeholder="Tulis detail pesananmu agar tidak salah pilih yaa...&#10;contoh: Item x yang besar, Item y pilih yang merah"
+                                v-model="state.note"
+                            ></textarea>
+                            <div v-if="validation.note" class="mt-2 alert alert-danger rounded-pill">harap tulis detail pesananmu yaa...</div>
+                        </div>
 
                         <table class="table table-default">
                             <tbody>
@@ -272,12 +283,14 @@ export default {
             courier_service: '', // <- state untuk menyimpan service kurir
             buttonCheckout: false, // <-- state button checkout
             grandTotal: 0, // <-- state untuk grand total
+            note: '', // <- state note
         });
 
         const validation = reactive({
             name: false, // <-- validation name
             phone: false, // <-- validation phone
             address: false, // <-- validation address
+            note: false, // <- validation note
         });
 
         const provinces = onMounted(() => {
@@ -358,6 +371,7 @@ export default {
                     weight: cartWeight.value,
                     address: state.address,
                     grandTotal: state.grandTotal,
+                    note: state.note,
                 };
 
                 store
@@ -383,6 +397,9 @@ export default {
             }
             if (!state.address) {
                 validation.address = true;
+            }
+            if (!state.note) {
+                validation.note = true;
             }
         }
 
