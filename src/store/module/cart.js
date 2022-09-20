@@ -150,6 +150,7 @@ const cart = {
                     city: data.city_id,
                     address: data.address,
                     grand_total: data.grandTotal,
+                    note: data.note,
                 })
                     .then((response) => {
                         // RESOLVE WITH RESPONSE
