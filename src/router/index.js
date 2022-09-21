@@ -72,6 +72,11 @@ const routes = [
             requiresAuth: true,
         },
     },
+    {
+        path: '/search',
+        name: 'search',
+        component: () => import('@/components/SearchPage.vue'),
+    },
 ];
 
 // CREATE ROUTER

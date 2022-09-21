@@ -14,25 +14,26 @@
                         <form @submit.prevent="login">
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input type="email" v-model="user.email" class="form-control" placeholder="Email Address" />
+                                <input type="email" v-model="user.email" class="form-control rounded-pill" placeholder="Email Address" />
                             </div>
-                            <div v-if="validation.email" class="mt-2 alert alert-danger">
+
+                            <div v-if="validation.email" class="mt-2 alert alert-danger rounded-pill">
                                 {{ validation.email[0] }}
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" v-model="user.password" class="form-control" placeholder="Password" />
+                                <input type="password" v-model="user.password" class="form-control rounded-pill" placeholder="Password" />
                             </div>
-                            <div v-if="validation.password" class="mt-2 alert alert-danger">
+
+                            <div v-if="validation.password" class="mt-2 alert alert-danger rounded-pill">
                                 {{ validation.password[0] }}
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+                            <button type="submit" class="btn btn-light btn-md mt-3 btn-block shadow-md text-white rounded-pill" style="background: #3f7b70">LOGIN</button>
                         </form>
                     </div>
                 </div>
-
                 <div class="register mt-3 text-center">
                     <p>Belum punya akun ? <router-link v-bind:to="{ name: 'register' }">Daftar Sekarang !</router-link></p>
                 </div>

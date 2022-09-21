@@ -1,7 +1,7 @@
 <template>
-    <div class="container mt-5 mb-5">
+    <div class="container mt-3 mb-5">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="card border-0 rounded shadow">
                     <div class="card-body p-2">
                         <img v-bind:src="product.image" class="w-100 border" />
@@ -9,39 +9,55 @@
                 </div>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="card border-0 rounded shadow">
                     <div class="card-body">
-                        <label class="font-weight-bold" style="font-size: 20px"> {{ product.title }} </label>
+                        <label class="font-weight-bold" style="font-size: 20px">
+                            {{ product.title }}
+                        </label>
                         <hr />
+
                         <div class="price-product" id="price-product" style="font-size: 1.35rem">
-                            <span class="font-weight-bold mr-4" style="color: green">Rp. {{ calculateDiscount(product) }}</span>
-                            <s class="font-weight-bold" style="text-decoration-color: red">Rp. {{ product.price }}</s>
+                            <span class="font-weight-bold mr-2" style="font-size: 1.2rem"> Rp. {{ formatPrice(calculateDiscount(product)) }} </span>
+                            <s v-if="product.discount > 0" style="font-size: 1rem"> Rp. {{ formatPrice(product.price) }} </s>
                         </div>
+
                         <table class="table table-borderless mt-3">
                             <tbody>
-                                <tr>
+                                <tr v-if="product.discount > 0">
                                     <td class="font-weight-bold">DISKON</td>
                                     <td>:</td>
                                     <td>
-                                        <button class="btn btn-sm" style="color: #ff2f00; border-color: #ff2f00">DISKON {{ product.discount }} %</button>
+                                        <span class="badge badge-discount rounded-pill text-white p-2">{{ product.discount }} % OFF</span>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td class="font-weight-bold">BERAT</td>
                                     <td>:</td>
                                     <td>
-                                        <span class="badge badge-pill badge-success" style="font-size: 14px; border-radius: 0.3rem; padding: 0.25em 0.5em 0.2em">
-                                            {{ product.weight }} gram</span
-                                        >
+                                        <p>{{ product.weight }} gram</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">STOCK</td>
+                                    <td>:</td>
+                                    <td>
+                                        <p>{{ product.stock }}</p>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <button @click.prevent="addToCart(product.id, calculateDiscount(product), product.weight)" class="btn btn-primary btn-lg btn-block">
-                            <i class="fa fa-shopping-cart"></i> TAMBAH KE KERANJANG
+                        <button
+                            v-if="product.stock > 0"
+                            @click.prevent="addToCart(product.id, calculateDiscount(product), product.weight)"
+                            class="btn btn-light btn-lg btn-block text-white rounded-pill"
+                            style="background: #3f7b70"
+                        >
+                            <i class="fa fa-shopping-cart"></i> MASUKKAN KERANJANG
+                        </button>
+                        <button v-else class="btn btn-light btn-lg btn-block text-white rounded-pill" style="background: #3f7b70" disabled>
+                            <i class="fa fa-shopping-cart"></i> MASUKKAN KERANJANG
                         </button>
                     </div>
                 </div>
@@ -52,7 +68,7 @@
             <div class="col-md-12">
                 <div class="card border-0 rounded shadow">
                     <div class="card-body">
-                        <label class="font-weight-bold" style="font-size: 20px">KETERANGAN</label>
+                        <label class="font-weight-bold" style="font-size: 20px">DESKRIPSI PRODUK</label>
                         <hr />
                         <div v-html="product.content"></div>
                     </div>
@@ -97,12 +113,18 @@ export default {
             });
         }
 
+        function formatPrice(value) {
+            let val = (value / 1).toFixed(0).replace('.', ',');
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
         return {
             store,
             route,
             router,
             product,
             addToCart,
+            formatPrice,
         };
     },
 };

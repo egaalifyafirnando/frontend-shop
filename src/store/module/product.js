@@ -42,6 +42,20 @@ const product = {
                     console.log(error);
                 });
         },
+
+        // FEATURE SEARCHING
+        getSearchProduct({ commit }, products) {
+            // GET DATA PRODUCT BY SEARCH FROM SERVER
+            Api.get(`/search?q=${products}`)
+                .then((response) => {
+                    // commit to mutation GET_PRODUCTS with response data
+                    commit('GET_PRODUCTS', response.data.products);
+                })
+                .catch((error) => {
+                    // show error log from response
+                    console.log(error);
+                });
+        },
     },
 
     // GETTERS

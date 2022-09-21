@@ -1,8 +1,17 @@
 <template>
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item" v-for="(slider, id) in sliders" :class="{ active: id == 0 }" :key="slider.id">
-                <img :src="slider.image" class="d-block w-100 rounded-lg" />
+            <div v-if="sliders.length > 0">
+                <div class="carousel-item" v-for="(slider, id) in sliders" v-bind:class="{ active: id == 0 }" v-bind:key="slider.id">
+                    <img v-bind:src="slider.image" class="d-block w-100 rounded-lg" />
+                </div>
+            </div>
+            <div v-else>
+                <div class="card border-0 shadow-sm rounded-lg mb-3" v-for="loader in ContentLoader" v-bind:key="loader">
+                    <div class="card-body pt-4">
+                        <ContentLoader />
+                    </div>
+                </div>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
@@ -19,9 +28,14 @@
 <script>
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import { ContentLoader } from 'vue-content-loader';
 
 export default {
     name: 'SliderComponent',
+
+    components: {
+        ContentLoader,
+    },
 
     setup() {
         const store = useStore();
@@ -39,6 +53,7 @@ export default {
         return {
             store,
             sliders,
+            ContentLoader: 1,
         };
     },
 };

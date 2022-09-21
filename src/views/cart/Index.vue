@@ -4,50 +4,33 @@
             <div class="col-md-6">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <h5><i class="fa fa-shopping-cart"></i> DETAIL PESENAN</h5>
+                        <h5><i class="fa fa-shopping-cart"></i> DETAIL PESANAN</h5>
                         <hr />
 
-                        <table class="table" style="border-style: solid !important; border-color: rgb(198, 206, 214) !important">
-                            <tbody>
-                                <tr v-for="cart in carts" v-bind:key="cart.id" style="background: #edf2f7">
-                                    <td class="b-none" width="25%">
-                                        <div class="wrapper-image-cart">
-                                            <img v-bind:src="cart.product.image" style="width: 100%; border-radius: 0.5rem" />
-                                        </div>
-                                    </td>
+                        <div class="row pb-2" v-for="cart in carts" v-bind:key="cart.id">
+                            <div class="col-4">
+                                <div class="wrapper-image-cart">
+                                    <img v-bind:src="cart.product.image" style="width: 100%; border-radius: 0.5rem" />
+                                </div>
+                            </div>
 
-                                    <td class="b-none" width="50%">
-                                        <h5>
-                                            <b>{{ cart.product.title }}</b>
-                                        </h5>
-                                        <table class="table-borderless" style="font-size: 14px">
-                                            <tr>
-                                                <td style="padding: 0.2rem">QTY</td>
-                                                <td style="padding: 0.2rem">:</td>
-                                                <td style="padding: 0.2rem">
-                                                    <b>{{ cart.quantity }}</b>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
+                            <div class="col-8">
+                                <h5>
+                                    <b>{{ cart.product.title }}</b>
+                                </h5>
+                                <p class="m-0 font-weight-bold" style="font-size: 1.2rem">Rp. {{ moneyFormat(cart.price) }}</p>
+                                <p class="m-0">
+                                    <s style="text-decoration-color: red; font-size: 1rem">Rp. {{ moneyFormat(cart.product.price * cart.quantity) }}</s>
+                                </p>
+                                <div>
+                                    <b>Jumlah : {{ cart.quantity }}</b>
+                                    <button @click.prevent="removeCart(cart.id)" class="btn btn-sm btn-danger float-right" style="background: #911f27">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-                                    <td class="b-none text-right">
-                                        <p class="m-0 font-weight-bold">Rp. {{ moneyFormat(cart.price) }}</p>
-
-                                        <p class="m-0">
-                                            <s style="text-decoration-color: red">Rp. {{ moneyFormat(cart.product.price * cart.quantity) }}</s>
-                                        </p>
-
-                                        <br />
-                                        <div class="text-right">
-                                            <button @click.prevent="removeCart(cart.id)" class="btn btn-sm btn-danger">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                         <div class="form-group pb-2">
                             <textarea
                                 class="form-control"
@@ -68,10 +51,11 @@
                                     </td>
                                     <td class="set-td text-right" width="30%">&nbsp; : Rp.</td>
                                     <td class="text-right set-td">
-                                        <p class="m-0" id="subtotal">{{ moneyFormat(cartTotal) }}</p>
+                                        <p class="m-0" id="subtotal">
+                                            {{ moneyFormat(cartTotal) }}
+                                        </p>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td class="set-td text-left border-0">
                                         <p class="m-0">
@@ -80,10 +64,11 @@
                                     </td>
                                     <td class="set-td border-0 text-right">&nbsp; : Rp.</td>
                                     <td class="set-td border-0 text-right">
-                                        <p class="m-0" id="ongkir-cart">{{ moneyFormat(state.courier_cost) }}</p>
+                                        <p class="m-0" id="ongkir-cart">
+                                            {{ moneyFormat(state.courier_cost) }}
+                                        </p>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td class="text-left border-0">
                                         <p class="font-weight-bold m-0 h5 text-uppercase">Grand Total</p>
@@ -100,9 +85,9 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="card border-0 shadow rounded">
+                    <!-- start ongkos kirim -->
                     <div class="card-body">
                         <h5><i class="fa fa-user-circle"></i> RINCIAN PENGIRIMAN</h5>
                         <hr />
@@ -111,23 +96,23 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-bold">NAMA LENGKAP</label>
-                                    <input type="text" class="form-control" id="nama_lengkap" placeholder="Nama Lengkap" v-model="state.name" />
-                                    <div v-if="validation.name" class="mt-2 alert alert-danger">Masukkan Nama Lengkap</div>
+                                    <input type="text" class="form-control rounded-pill" id="nama_lengkap" placeholder="Nama Lengkap" v-model="state.name" />
+                                    <div v-if="validation.name" class="mt-2 alert alert-danger rounded-pill">Masukkan Nama Lengkap</div>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-weight-bold">NO. HP / WHATSAPP</label>
-                                    <input type="number" class="form-control" id="phone" placeholder="No. HP / WhatsApp" v-model="state.phone" />
-                                    <div v-if="validation.phone" class="mt-2 alert alert-danger">Masukkan No. Telp</div>
+                                    <input type="number" class="form-control rounded-pill" id="phone" placeholder="No. HP / WhatsApp" v-model="state.phone" />
+                                    <div v-if="validation.phone" class="mt-2 alert alert-danger rounded-pill">Masukkan No. Telp</div>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="font-weight-bold">PROVINSI</label>
-                                    <select class="form-control" v-model="state.province_id" @change="getCities">
+                                    <label class="font-weight-bold">PROVINSI </label>
+                                    <select class="form-control rounded-pill" v-model="state.province_id" @change="getCities">
                                         <option value="">-- pilih provinsi --</option>
                                         <option v-for="province in state.provinces" v-bind:key="province.id" v-bind:value="province.province_id">
                                             {{ province.name }}
@@ -138,49 +123,72 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="font-weight-bold">KOTA / KABUPATEN</label>
-                                    <select class="form-control" v-model="state.city_id" @change="getCourier">
+                                    <label class="font-weight-bold"> KOTA / KABUPATEN </label>
+                                    <select class="form-control rounded-pill" v-model="state.city_id" @change="getCourier">
                                         <option value="">-- pilih kota --</option>
-                                        <option v-for="city in state.cities" v-bind:key="city.id" v-bind:value="city.city_id">{{ city.name }}</option>
+                                        <option v-for="city in state.cities" v-bind:key="city.id" v-bind:value="city.city_id">
+                                            {{ city.name }}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group" v-if="state.courier">
-                                    <label class="font-weight-bold">KURIR PENGIRIMAN</label>
+                                    <label class="font-weight-bold"> KURIR PENGIRIMAN </label>
                                     <br />
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input select-courier"
-                                            type="radio"
-                                            name="courier"
-                                            id="ongkos_kirim-jne"
-                                            value="jne"
-                                            v-model="state.courier_type"
-                                            @change="getOngkir"
-                                        />
-                                        <label class="form-check-label font-weight-bold mr-4" for="ongkos_kirim-jne"> JNE</label>
-                                        <input
-                                            class="form-check-input select-courier"
-                                            type="radio"
-                                            name="courier"
-                                            id="ongkos_kirim-tiki"
-                                            value="tiki"
-                                            v-model="state.courier_type"
-                                            @change="getOngkir"
-                                        />
-                                        <label class="form-check-label font-weight-bold mr-4" for="ongkos_kirim-jnt">TIKI</label>
-                                        <input
-                                            class="form-check-input select-courier"
-                                            type="radio"
-                                            name="courier"
-                                            id="ongkos_kirim-pos"
-                                            value="pos"
-                                            v-model="state.courier_type"
-                                            @change="getOngkir"
-                                        />
-                                        <label class="form-check-label font-weight-bold" for="ongkos_kirim-jnt">POS</label>
+
+                                    <div class="form-check form-check-inline row w-100 mx-auto">
+                                        <label
+                                            class="form-check-label font-weight-bold badge badge-pill col-4 py-2"
+                                            for="ongkos_kirim-jne"
+                                            style="border-radius: 2rem 0 0 2rem; background: #e2e8f0"
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="courier"
+                                                id="ongkos_kirim-jne"
+                                                class="form-check-input select-courier"
+                                                value="jne"
+                                                v-model="state.courier_type"
+                                                @change="getOngkir"
+                                            />
+                                            JNE
+                                        </label>
+
+                                        <label
+                                            class="form-check-label font-weight-bold badge badge-pill col-4 py-2"
+                                            for="ongkos_kirim-tiki"
+                                            style="border-radius: 0; background: #e2e8f0"
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="courier"
+                                                id="ongkos_kirim-tiki"
+                                                class="form-check-input select-courier"
+                                                value="tiki"
+                                                v-model="state.courier_type"
+                                                @change="getOngkir"
+                                            />
+                                            TIKI
+                                        </label>
+
+                                        <label
+                                            class="form-check-label font-weight-bold badge badge-pill col-4 py-2"
+                                            for="ongkos_kirim-pos"
+                                            style="border-radius: 0 2rem 2rem 0; background: #e2e8f0"
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="courier"
+                                                id="ongkos_kirim-pos"
+                                                class="form-check-input select-courier"
+                                                value="pos"
+                                                v-model="state.courier_type"
+                                                @change="getOngkir"
+                                            />
+                                            POS
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -191,18 +199,21 @@
                                     <label class="font-weight-bold">SERVICE KURIR</label>
                                     <br />
                                     <div v-for="value in state.costs" v-bind:key="value.service" class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="radio"
-                                            name="cost"
-                                            v-bind:id="value.service"
-                                            v-bind:value="value.cost[0].value + '|' + value.service"
-                                            v-model="state.costService"
-                                            @change="getCostService"
-                                        />
-                                        <label class="form-check-label font-weight-normal mr-5" v-bind:for="value.service">
-                                            {{ value.service }} - Rp. {{ moneyFormat(value.cost[0].value) }}</label
-                                        >
+                                        <label class="form-check-label font-weight-normal p-1" v-bind:for="value.service">
+                                            <input
+                                                class="form-check-input"
+                                                type="radio"
+                                                name="cost"
+                                                v-bind:id="value.service"
+                                                v-bind:value="value.cost[0].value + '|' + value.service"
+                                                v-model="state.costService"
+                                                @change="getCostService"
+                                            />
+                                            <small
+                                                >{{ value.service }} - Rp.
+                                                {{ moneyFormat(value.cost[0].value) }}
+                                            </small>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -212,20 +223,24 @@
                                     <label class="font-weight-bold">ALAMAT LENGKAP</label>
                                     <textarea
                                         class="form-control"
+                                        style="border-radius: 1.5rem"
                                         id="alamat"
                                         rows="3"
-                                        placeholder="Alamat Lengkap&#10;&#10;Contoh: Perum. Griya Palem Indah, B-17 Jombang Jawa Timur 61419"
+                                        placeholder="Contoh:&#10;Jl. Langsep no. x, Ds. Tenggulunan, Candi, Sidoarjo 61271"
                                         v-model="state.address"
                                     ></textarea>
-                                    <div v-if="validation.address" class="mt-2 alert alert-danger">Masukkan Alamat Lengkap</div>
+                                    <div v-if="validation.address" class="mt-2 alert alert-danger rounded-pill">Masukkan Alamat Lengkap</div>
                                 </div>
                             </div>
 
                             <div v-if="state.buttonCheckout" class="col-md-12">
-                                <button @click.prevent="checkout" class="btn btn-primary btn-lg btn-block">CHECKOUT</button>
+                                <button @click.prevent="checkout" class="btn btn-light btn-lg btn-block rounded-pill" style="background: #3f7b70; color: white">
+                                    CHECKOUT
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <!-- end ongkos kirim -->
                 </div>
             </div>
         </div>
@@ -359,7 +374,7 @@ export default {
         }
 
         function checkout() {
-            if (state.name && state.phone && state.address && cartWeight.value) {
+            if (state.name && state.phone && state.address && cartWeight.value && state.note) {
                 let data = {
                     name: state.name,
                     phone: state.phone,

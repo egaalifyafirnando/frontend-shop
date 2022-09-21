@@ -4,15 +4,15 @@
             <div class="row">
                 <div class="col-md-9 mb-4">
                     <!-- component Slider -->
-                    <Slider data-aos="fade-up" data-aos-once="true" />
+                    <Slider />
                 </div>
-
                 <div class="col-md-3 mb-4">
                     <!-- component Category -->
-                    <Category data-aos="fade-up" data-aos-once="true" />
+                    <Category />
                 </div>
             </div>
         </div>
+
         <!-- search -->
         <div class="container-fluid search-mini">
             <div class="row">
@@ -34,13 +34,15 @@
                 </div>
             </div>
         </div>
+
         <div class="mb-5 mt-4">
             <!-- data product -->
             <div class="col">
                 <div v-if="products.length > 0" class="row">
                     <div v-for="product in products" v-bind:key="product.id" class="col-md-3 col-6 mb-3">
-                        <div class="card h-100 border-0 shadow rounded-md" data-aos="fade-up" data-aos-once="true">
+                        <div class="card h-100 border-0 shadow rounded-md">
                             <span v-if="product.discount > 0" class="ribbon"></span>
+
                             <div class="card-img">
                                 <img
                                     v-bind:src="product.image"
@@ -49,6 +51,7 @@
                                     style="height: 15em; object-fit: cover; border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem"
                                 />
                             </div>
+
                             <div class="card-body" style="padding: 1rem">
                                 <router-link
                                     v-bind:to="{
@@ -73,7 +76,7 @@
                                                 <s>Rp. {{ moneyFormat(product.price) }}</s>
                                             </div>
                                             <div class="col-4 d-flex justify-content-end">
-                                                <span class="badge badge-pill badge-discount text-white d-flex align-items-center"> {{ product.discount }}% OFF</span>
+                                                <span class="badge badge-pill badge-discount text-white d-flex align-items-center">{{ product.discount }}% OFF</span>
                                             </div>
                                         </div>
                                     </small>
@@ -91,7 +94,7 @@
                                     }"
                                     class="btn btn-detail btn-md mt-3 btn-block shadow-md text-white font-weight-bold rounded-pill"
                                 >
-                                    DETAIL
+                                    Detail
                                 </router-link>
                             </div>
                         </div>
@@ -101,7 +104,7 @@
                 <div v-else>
                     <div class="row">
                         <div class="col-md-3 col-6 mb-3" v-for="loader in ContentLoader" v-bind:key="loader">
-                            <div class="card h-100 border-0 shadow rounded-md" data-aos="fade-up" data-aos-once="true">
+                            <div class="card h-100 border-0 shadow rounded-md">
                                 <div class="card-body" style="padding: 1rem">
                                     <ContentLoader viewBox="0 0 150 200" :speed="2" primaryColor="#fafafa" secondaryColor="#e2e8f0">
                                         <rect x="21" y="178" rx="10" ry="10" width="111" height="19" />
@@ -120,17 +123,14 @@
 </template>
 
 <script>
+import { ContentLoader } from 'vue-content-loader';
 import Category from '@/components/Category';
 import Slider from '@/components/Slider';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
-import { ContentLoader } from 'vue-content-loader';
-
 export default {
-    name: 'HomeComponent',
-
     components: {
         Category,
         Slider,
@@ -138,18 +138,23 @@ export default {
     },
 
     setup() {
+        // store vuex
         const store = useStore();
-        const router = useRouter;
 
+        // vue router
+        const router = useRouter();
+
+        // onMounted akan menjalankan action "getProducts" di module product
         onMounted(() => {
             store.dispatch('product/getProducts');
         });
 
+        // computed properti digunakan untuk get data products dari state di module product
         const products = computed(() => {
             return store.state.product.products;
         });
 
-        // feature search
+        // fitur search
         let keywords = ref('');
         function search() {
             store.dispatch('product/getSearchProduct', keywords.value);
@@ -159,9 +164,9 @@ export default {
         return {
             store,
             products,
-            keywords,
-            search,
             ContentLoader: 4,
+            search,
+            keywords,
         };
     },
 };

@@ -12,9 +12,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                        <input type="text" v-model="user.name" class="form-control" placeholder="Full Name" />
+                                        <input type="text" v-model="user.name" class="form-control rounded-pill" placeholder="Full Name" />
                                     </div>
-                                    <div v-if="validation.name" class="mt-2 alert alert-danger">
+                                    <div v-if="validation.name" class="mt-2 alert alert-danger rounded-pill" style="padding= 0px;">
                                         {{ validation.name[0] }}
                                     </div>
                                 </div>
@@ -22,9 +22,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email address</label>
-                                        <input type="email" v-model="user.email" class="form-control" placeholder="Email Address" />
+                                        <input type="email" v-model="user.email" class="form-control rounded-pill" placeholder="Email Address" />
                                     </div>
-                                    <div v-if="validation.email" class="mt-2 alert alert-danger">
+                                    <div v-if="validation.email" class="mt-2 alert alert-danger rounded-pill">
                                         {{ validation.email[0] }}
                                     </div>
                                 </div>
@@ -34,28 +34,27 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" v-model="user.password" class="form-control" placeholder="Password" />
+                                        <input type="password" v-model="user.password" class="form-control rounded-pill" placeholder="Password" />
                                     </div>
-                                    <div v-if="validation.password" class="mt-2 alert alert-danger">
+                                    <div v-if="validation.password" class="mt-2 alert alert-danger rounded-pill">
                                         {{ validation.password[0] }}
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Konfirmasi Password</label>
-                                        <input type="password" v-model="user.password_confirmation" class="form-control" placeholder="Konfirmasi Password" />
+                                        <input type="password" v-model="user.password_confirmation" class="form-control rounded-pill" placeholder="Konfirmasi Password" />
                                     </div>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
+                            <button type="submit" class="btn btn-light btn-md mt-3 btn-block shadow-md text-white rounded-pill" style="background: #3f7b70">
+                                REGISTER
+                            </button>
                         </form>
                     </div>
                 </div>
-
                 <div class="register mt-3 text-center">
-                    <p>Suda punya akun ? <router-link v-bind:to="{ name: 'login' }">Login Disini !</router-link></p>
+                    <p>Sudah punya akun ? <router-link v-bind:to="{ name: 'login' }">Login Disini !</router-link></p>
                 </div>
             </div>
         </div>
