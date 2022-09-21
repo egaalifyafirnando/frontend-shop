@@ -181,7 +181,7 @@ const cart = {
 
         // COUNT TOTAL CART LENGTH
         cartCount(state) {
-            return state.cart.length;
+            return state.cart.map((cart) => cart.quantity).reduce((previousValue, currentValue) => previousValue + currentValue, 0);
         },
 
         // GET TOTAL CART
