@@ -134,7 +134,7 @@
 
                                 <div class="row">
                                     <div class="col">
-                                        <p class="alert alert-success"><strong>Catatan Pesanan :</strong> {{ detailOrder.product_message }}</p>
+                                        <p class="alert alert-success"><strong>Catatan Pesanan :</strong> {{ detailOrder.note }}</p>
                                     </div>
                                 </div>
                             </div>
