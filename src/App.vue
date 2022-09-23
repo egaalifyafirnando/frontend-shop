@@ -32,8 +32,7 @@ export default {
                 console.log('Authenticated.');
             })
             .catch((error) => {
-                console.log(error);
-                if (error.response.data.message === 'Unauthenticated.') {
+                if (error.response.status === 401) {
                     localStorage.removeItem('token');
                     localStorage.removeItem('user');
                     if (token === null) {
