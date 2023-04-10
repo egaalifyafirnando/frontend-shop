@@ -2,7 +2,7 @@
     <div class="container mt-3 mb-5">
         <div class="row">
             <div class="col-md-8">
-                <div class="card border-0 rounded shadow">
+                <div class="card border-0 rounded-lg shadow">
                     <div class="card-body p-2">
                         <img v-bind:src="product.image" class="w-100 border" />
                     </div>
@@ -10,16 +10,31 @@
             </div>
 
             <div class="col-md-4">
-                <div class="card border-0 rounded shadow">
+                <div class="card border-0 rounded-lg shadow">
                     <div class="card-body">
                         <label class="font-weight-bold" style="font-size: 20px">
                             {{ product.title }}
                         </label>
                         <hr />
 
-                        <div class="price-product" id="price-product" style="font-size: 1.35rem">
-                            <span class="font-weight-bold mr-2" style="font-size: 1.2rem"> Rp. {{ formatPrice(calculateDiscount(product)) }} </span>
-                            <s v-if="product.discount > 0" style="font-size: 1rem"> Rp. {{ formatPrice(product.price) }} </s>
+                        <div
+                            class="price-product"
+                            id="price-product"
+                            style="font-size: 1.35rem"
+                        >
+                            <span
+                                class="font-weight-bold mr-2"
+                                style="font-size: 1.2rem"
+                            >
+                                Rp.
+                                {{ formatPrice(calculateDiscount(product)) }}
+                            </span>
+                            <s
+                                v-if="product.discount > 0"
+                                style="font-size: 1rem"
+                            >
+                                Rp. {{ formatPrice(product.price) }}
+                            </s>
                         </div>
 
                         <table class="table table-borderless mt-3">
@@ -28,7 +43,10 @@
                                     <td class="font-weight-bold">DISKON</td>
                                     <td>:</td>
                                     <td>
-                                        <span class="badge badge-discount rounded-pill text-white p-2">{{ product.discount }} % OFF</span>
+                                        <span
+                                            class="badge badge-discount rounded-pill text-white p-2"
+                                            >{{ product.discount }} % OFF</span
+                                        >
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,14 +68,27 @@
 
                         <button
                             v-if="product.stock > 0"
-                            @click.prevent="addToCart(product.id, calculateDiscount(product), product.weight)"
+                            @click.prevent="
+                                addToCart(
+                                    product.id,
+                                    calculateDiscount(product),
+                                    product.weight
+                                )
+                            "
                             class="btn btn-light btn-lg btn-block text-white rounded-pill"
                             style="background: #3f7b70"
                         >
-                            <i class="fa fa-shopping-cart"></i> MASUKKAN KERANJANG
+                            <i class="fa fa-shopping-cart"></i> MASUKKAN
+                            KERANJANG
                         </button>
-                        <button v-else class="btn btn-light btn-lg btn-block text-white rounded-pill" style="background: #3f7b70" disabled>
-                            <i class="fa fa-shopping-cart"></i> MASUKKAN KERANJANG
+                        <button
+                            v-else
+                            class="btn btn-light btn-lg btn-block text-white rounded-pill"
+                            style="background: #3f7b70"
+                            disabled
+                        >
+                            <i class="fa fa-shopping-cart"></i> MASUKKAN
+                            KERANJANG
                         </button>
                     </div>
                 </div>
@@ -66,9 +97,11 @@
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <div class="card border-0 rounded shadow">
+                <div class="card border-0 rounded-lg shadow">
                     <div class="card-body">
-                        <label class="font-weight-bold" style="font-size: 20px">DESKRIPSI PRODUK</label>
+                        <label class="font-weight-bold" style="font-size: 20px"
+                            >DESKRIPSI PRODUK</label
+                        >
                         <hr />
                         <div v-html="product.content"></div>
                     </div>

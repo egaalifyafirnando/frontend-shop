@@ -35,7 +35,7 @@
         </div>
         <div>
             <div class="col mb-5 mt-4">
-                <div class="card border-0 shadow rounded">
+                <div class="card border-0 shadow rounded-lg">
                     <div class="card-body">
                         <h5 class="font-weight-bold">
                             <i class="fa fa-shopping-bag"></i> KATEGORI
@@ -53,7 +53,7 @@
                             }"
                         >
                             <swiper-slide
-                                v-for="category in categories"
+                                v-for="category in categories.slice(0, 8)"
                                 v-bind:key="category.id"
                                 data-aos="fade-up"
                                 data-aos-once="true"
@@ -65,7 +65,7 @@
                                     }"
                                 >
                                     <div
-                                        class="h-100 list-group-item font-weight-bold text-decoration-none rounded"
+                                        class="h-100 list-group-item font-weight-bold text-decoration-none rounded-lg"
                                     >
                                         <div class="text-center">
                                             <img
@@ -85,10 +85,10 @@
                             </swiper-slide>
                         </swiper-container>
 
-                        <div class="d-flex justify-content-center">
+                        <div class="mt-2 d-flex justify-content-center">
                             <router-link
                                 v-bind:to="{ name: 'categories' }"
-                                class="w-25 list-group-item text-center active shadow-sm font-weight-bold text-decoration-none rounded-pill"
+                                class="list-group-item text-center active shadow-sm font-weight-bold text-decoration-none rounded-pill"
                             >
                                 LIHAT LAINNYA
                                 <i class="fa fa-long-arrow-alt-right"></i>
@@ -107,7 +107,7 @@
                         class="col-md-3 col-6 mb-3"
                     >
                         <div
-                            class="card h-100 border-0 shadow rounded-md"
+                            class="card h-100 border-0 shadow rounded-lg"
                             data-aos="fade-up"
                             data-aos-once="true"
                         >
@@ -123,8 +123,8 @@
                                     style="
                                         height: 15em;
                                         object-fit: cover;
-                                        border-top-left-radius: 0.25rem;
-                                        border-top-right-radius: 0.25rem;
+                                        border-top-left-radius: 0.3rem;
+                                        border-top-right-radius: 0.3rem;
                                     "
                                 />
                             </div>
@@ -218,7 +218,7 @@
                             v-bind:key="loader"
                         >
                             <div
-                                class="card h-100 border-0 shadow rounded-md"
+                                class="card h-100 border-0 shadow rounded-lg"
                                 data-aos="fade-up"
                                 data-aos-once="true"
                             >
